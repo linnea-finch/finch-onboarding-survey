@@ -4,8 +4,30 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Finch Onboarding Survey</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
+  @font-face {
+  font-family: 'Area Normal';
+  src: url('Area Normal/Area_Normal_Bold.otf') format('opentype');
+  font-weight: 300 600;
+}
+
+@font-face {
+  font-family: 'Area Normal';
+  src: url('Area Normal/Area_Normal_Regular.otf') format('opentype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'P22 Mackinac';
+  src: url('P22 Mackinac/Mackinac-Book.otf') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'P22 Mackinac';
+  src: url('P22 Mackinac/Mackinac-Bold.otf') format('opentype');
+  font-weight: 600;
+}
   :root {
     --cream: #F7F3EE;
     --ink: #1A1A18;
@@ -22,7 +44,7 @@
   body {
     background: var(--cream);
     color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Area Normal', sans-serif;
     font-weight: 300;
     min-height: 100vh;
     padding: 48px 20px;
@@ -53,7 +75,7 @@
   }
 
   h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'P22 Mackinac', serif;
     font-size: 28px;
     font-weight: 600;
     letter-spacing: -0.5px;
@@ -84,7 +106,7 @@
     border: none;
     border-radius: 9px;
     background: transparent;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Area Normal', sans-serif;
     font-size: 14px;
     font-weight: 400;
     color: #888;
@@ -163,7 +185,7 @@
     border: 1.5px solid var(--border);
     border-radius: 10px;
     background: var(--cream);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Area Normal', sans-serif;
     font-size: 15px;
     font-weight: 500;
     color: #888;
@@ -199,7 +221,7 @@
     border-radius: 10px;
     background: var(--cream);
     padding: 12px 14px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Area Normal', sans-serif;
     font-size: 14px;
     font-weight: 300;
     color: var(--ink);
@@ -218,7 +240,7 @@
     border: 1.5px solid var(--border);
     border-radius: 10px;
     background: var(--cream);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Area Normal', sans-serif;
     font-size: 14px;
     color: var(--ink);
     outline: none;
@@ -270,7 +292,7 @@
     border: 1.5px dashed var(--border);
     border-radius: 10px;
     background: transparent;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Area Normal', sans-serif;
     font-size: 13px;
     color: #aaa;
     cursor: pointer;
@@ -287,7 +309,7 @@
     color: var(--cream);
     border: none;
     border-radius: 12px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Area Normal', sans-serif;
     font-size: 15px;
     font-weight: 500;
     cursor: pointer;
@@ -312,7 +334,7 @@
   .success-icon { font-size: 48px; margin-bottom: 16px; display: block; }
 
   .success h2 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'P22 Mackinac', serif;
     font-size: 24px;
     margin-bottom: 8px;
   }
@@ -326,7 +348,7 @@
     border: 1.5px solid var(--border);
     border-radius: 10px;
     background: var(--cream);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Area Normal', sans-serif;
     font-size: 14px;
     color: var(--ink);
     outline: none;
@@ -348,7 +370,7 @@
 
   <div class="toggle-row">
     <button class="toggle-btn active" onclick="switchTo('hatchling')">🥚 I'm a Hatchling</button>
-    <button class="toggle-btn" onclick="switchTo('finch')">🐦 I'm a Finch</button>
+    <button class="toggle-btn" onclick="switchTo('finch')">🐦 I'm a Finch Lead</button>
   </div>
 
   <!-- HATCHLING SURVEY -->
@@ -399,7 +421,7 @@
 
     <div class="card">
       <div class="question-label">Which onboarding session did you lead?</div>
-      <div class="question-hint">e.g. "Company Intro," "Culture & Values," "Role Deep-Dive"</div>
+      <div class="question-hint">e.g. "Company Intro," "Liens Rotation," "Growth Intro"</div>
       <input type="text" id="f-session" placeholder="Session name" />
     </div>
 

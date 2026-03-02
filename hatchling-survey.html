@@ -30,6 +30,7 @@
     --cream: #F7F3EE;
     --ink: #1A1A18;
     --sage: #7A9E7E;
+    --finchblue: #3e36ef;
     --accent: #E8623A;
     --surface: #FFFFFF;
     --border: #E2DDD6;
@@ -142,8 +143,8 @@
     padding: 5px 12px;
     border-radius: 20px;
     margin-bottom: 28px;
-    background: #EBF3EB;
-    color: var(--sage);
+    background: #ebebf3;
+    color: var(--finchblue);
   }
 
   .card {
@@ -181,7 +182,7 @@
     transition: all 0.18s ease;
   }
 
-  .rating-btn:hover { border-color: var(--sage); color: var(--sage); }
+  .rating-btn:hover { border-color: var(--finchblue); color: var(--finchblue); }
   .rating-btn.selected { background: var(--ink); border-color: var(--ink); color: var(--cream); transform: scale(1.08); }
 
   .rating-labels { display: flex; justify-content: space-between; margin-top: 8px; font-size: 11px; color: #bbb; }
@@ -202,8 +203,29 @@
     transition: border-color 0.2s;
   }
 
-  textarea:focus { border-color: var(--sage); }
+  textarea:focus { border-color: var(--finchblue); }
   textarea::placeholder { color: #bbb; }
+
+  /* Select */
+  select {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--cream);
+    font-family: 'Area Normal', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    transition: border-color 0.2s;
+  }
+
+  select:focus { border-color: var(--finchblue); }
 
   input[type="text"] {
     width: 100%;
@@ -218,7 +240,7 @@
     transition: border-color 0.2s;
   }
 
-  input[type="text"]:focus { border-color: var(--sage); }
+  input[type="text"]:focus { border-color: var(--finchblue); }
   input[type="text"]::placeholder { color: #bbb; }
 
   .submit-btn {
@@ -263,13 +285,13 @@
 <div class="container">
   <div class="header">
     <img class="bird-icon" src="logo-bird-color.png" alt="Finch logo" />
-    <h1>Week One Check-In</h1>
+    <h1>Week One Surveys</h1>
     <p class="subtitle">A quick pulse on how each day went</p>
   </div>
 
   <div class="toggle-row">
     <!-- To unlock a tab, remove the class "locked" from the button -->
-    <button class="toggle-btn active" onclick="switchTo('day1')">Day 1</button>
+    <button class="toggle-btn active" onclick="switchTo('day1')">Monday</button>
     <!-- <button class="toggle-btn locked">Tuesday</button> -->
     <button class="toggle-btn locked">Tuesday</button>
     <!-- <button class="toggle-btn locked">Wednesday</button> -->
@@ -286,8 +308,8 @@
 
     <div class="card">
       <div class="question-label">What's your name?</div>
-      <div class="question-hint">So we know who this is from.</div>
-      <input type="text" id="day1-name" placeholder="Your name" />
+      <div class="question-hint">You may also remain anonymous. </div>
+      <input type="text" id="day1-name" placeholder="Your name (optional)" />
     </div>
 
     <div class="card">
@@ -308,8 +330,84 @@
       <div class="rating-labels"><span>Rough start</span><span>Couldn't be better</span></div>
     </div>
 
+        <div class="card">
+      <div class="question-label">How was the HR and People Operations Meeting?</div>
+      <div class="question-hint">1 = rough start · 10 = couldn't have gone better</div>
+      <div class="rating-row" id="POPS-rating">
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 1)">1</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 2)">2</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 3)">3</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 4)">4</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 5)">5</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 6)">6</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 7)">7</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 8)">8</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 9)">9</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 10)">10</button>
+      </div>
+      <div class="rating-labels"><span>Rough start</span><span>Couldn't be better</span></div>
+        <div style="margin-top: 16px;">
+        <textarea id="POPS-rating-comment" placeholder="Anything specific to share? (optional)"></textarea>
+        </div>
+      </div>
+
+       <div class="card">
+      <div class="question-label">How was system/laptop setup?</div>
+      <div class="question-hint">1 = rough start · 10 = couldn't have gone better</div>
+      <div class="rating-row" id="system-rating">
+        <button class="rating-btn" onclick="selectRating('system-rating', 1)">1</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 2)">2</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 3)">3</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 4)">4</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 5)">5</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 6)">6</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 7)">7</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 8)">8</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 9)">9</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 10)">10</button>
+      </div>
+      <div class="rating-labels"><span>Rough start</span><span>Couldn't be better</span></div>
+        <div style="margin-top: 16px;">
+        <textarea id="system-rating-comment" placeholder="Anything specific to share? (optional)"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+      <div class="question-label">How were your tutorial sessions (Finch App, Scavenger hunts)?</div>
+      <div class="question-hint">1 = rough start · 10 = couldn't have gone better</div>
+      <div class="rating-row" id="tutorial-rating">
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 1)">1</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 2)">2</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 3)">3</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 4)">4</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 5)">5</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 6)">6</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 7)">7</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 8)">8</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 9)">9</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 10)">10</button>
+      </div>
+      <div class="rating-labels"><span>Rough start</span><span>Couldn't be better</span></div>
+        <div style="margin-top: 16px;">
+        <textarea id="tutorial-rating-comment" placeholder="Anything specific to share? (optional)"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+  <div class="question-label">How did the structure of the day feel?</div>
+  <select id="day1-structure">
+    <option value="">—</option>
+    <option>Not structured enough, I felt lost</option>
+    <option>Almost structured enough, there were a few moments I felt unsure what to do</option>
+    <option>Just structured enough</option>
+    <option>A little too structured, I would've liked more time to explore on my own</option>
+    <option>Way too structured, I was overwhelmed</option>
+  </select>
+  </div>
+
+
     <div class="card">
-      <div class="question-label">Anything on your mind after Day 1?</div>
+      <div class="question-label">Anything else on your mind after Day 1?</div>
       <div class="question-hint">What worked, what didn't, what you wish you'd known.</div>
       <textarea id="day1-feedback" placeholder="Share anything..."></textarea>
     </div>
@@ -521,13 +619,29 @@
     var nameEl = document.getElementById(day + '-name');
     var ratingEl = document.getElementById(day + '-rating');
     var feedbackEl = document.getElementById(day + '-feedback');
+    var popsRatingEl = document.getElementById('POPS-rating');
+    var popsFeedbackEl = document.getElementById('POPS-rating-comment');
+    var systemRatingEl = document.getElementById('system-rating');
+    var systemFeedbackEl = document.getElementById('system-rating-comment');
+    var tutorialRatingEl = document.getElementById('tutorial-rating');
+    var tutorialFeedbackEl = document.getElementById('tutorial-rating-comment');
+    var structureEl = document.getElementById(day + '-structure');
+
+    
 
     var payload = {
       type: 'hatchling',
       day: day,
       name: nameEl ? nameEl.value.trim() : '',
       rating: ratingEl ? (ratingEl.dataset.value || '') : '',
-      feedback: feedbackEl ? feedbackEl.value.trim() : ''
+      feedback: feedbackEl ? feedbackEl.value.trim() : '',
+      structure: structureEl ? structureEl.value.trim() : '',
+      popsRating: popsRatingEl ? (popsRatingEl.dataset.value || '') : '',
+      popsFeedback: popsFeedbackEl ? popsFeedbackEl.value.trim() : '',
+      systemRating: systemRatingEl ? (systemRatingEl.dataset.value || '') : '',
+      systemFeedback: systemFeedbackEl ? systemFeedbackEl.value.trim() : '',
+      tutorialRating: tutorialRatingEl ? (tutorialRatingEl.dataset.value || '') : '',
+      tutorialFeedback: tutorialFeedbackEl ? tutorialFeedbackEl.value.trim() : ''
     };
 
     var iframe = document.getElementById('submit-iframe');

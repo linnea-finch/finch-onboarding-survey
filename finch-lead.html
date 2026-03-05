@@ -869,7 +869,7 @@
     div.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
-  const SCRIPT_URL = 'https://script.google.com/a/macros/finchlegal.com/s/AKfycbzpD0A4LaIsQkxvipD15g2A6lLvRDr3lRze1MfN14oTRcsRRfRv_PO6N27bSkBnV0fz/exec';
+  const SCRIPT_URL = 'https://script.google.com/a/macros/finchlegal.com/s/AKfycbwXO4gIxQLZ75Qh28x-ufql4IsMKNXSIfQjc1Sxh8QyXDenPbqt2UI6OsqSm-QIL9hSDg/exec';
 
   // Day prefix map
   const dayPrefixes = {
@@ -880,66 +880,72 @@
     friday: 'fri'
   };
 
-  function submitSurvey(day) {
-    const btn = document.querySelector('#' + day + '-panel .submit-btn');
-    btn.textContent = 'Sending…';
-    btn.disabled = true;
+function submitSurvey(day) {
+  const btn = document.querySelector('#' + day + '-panel .submit-btn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
 
-    const prefix = dayPrefixes[day];
-    const hireListId = prefix + '-hire-list';
-    const hires = [];
-    document.querySelectorAll('#' + hireListId + ' .hire-row').forEach(function(row) {
-      const inputs = row.querySelectorAll('input[type="text"]');
-      const selects = row.querySelectorAll('select');
-      hires.push({
-        name: inputs[0] ? inputs[0].value.trim() : '',
-        engagement: selects[0] ? selects[0].value : '',
-        readiness: selects[1] ? selects[1].value : ''
-      });
+  const prefix = dayPrefixes[day];
+  const hires = [];
+
+  // Collect from ALL hire-list containers in the panel (handles mon-hire-list, mon-hire-list-2, etc.)
+  const panel = document.getElementById(day + '-panel');
+  panel.querySelectorAll('.hire-row').forEach(function(row) {
+    // Name: read from .hire-name div (hardcoded) or a text input (dynamic rows)
+    const nameDiv = row.querySelector('.hire-name');
+    const nameInput = row.querySelector('input[type="text"]');
+    const name = nameDiv ? nameDiv.textContent.trim() : (nameInput ? nameInput.value.trim() : '');
+
+    const selects = row.querySelectorAll('select');
+    hires.push({
+      name: name,
+      engagement: selects[0] ? selects[0].value : '',
+      readiness: selects[1] ? selects[1].value : ''
     });
+  });
 
-    const payload = {
-      type: 'finch',
-      day: day,
-      leaderName: (document.getElementById(prefix + '-f-name') || {}).value || '',
-      session: (document.getElementById(prefix + '-f-session') || {}).value || '',
-      sessionFeedback: (document.getElementById(prefix + '-f-session-feedback') || {}).value || '',
-      hires: hires,
-      other: (document.getElementById(prefix + '-f-other') || {}).value || ''
-    };
+  const payload = {
+    type: 'finch',
+    day: day,
+    leaderName: (document.getElementById(prefix + '-f-name') || {}).value || '',
+    session: (document.getElementById(prefix + '-f-session') || {}).value || '',
+    sessionFeedback: (document.getElementById(prefix + '-f-session-feedback') || {}).value || '',
+    hires: hires,
+    other: (document.getElementById(prefix + '-f-other') || {}).value || ''
+  };
 
-    var iframe = document.getElementById('submit-iframe');
-    if (!iframe) {
-      iframe = document.createElement('iframe');
-      iframe.id = 'submit-iframe';
-      iframe.name = 'submit-iframe';
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
-    }
-
-    var form = document.createElement('form');
-    form.method = 'POST';
-    form.action = SCRIPT_URL;
-    form.target = 'submit-iframe';
-    form.style.display = 'none';
-
-    var input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'payload';
-    input.value = JSON.stringify(payload);
-    form.appendChild(input);
-
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
-
-    setTimeout(function() {
-      document.getElementById(day + '-panel').classList.remove('visible');
-      document.getElementById('success').classList.add('visible');
-      document.querySelector('.toggle-row').style.display = 'none';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 1500);
+  var iframe = document.getElementById('submit-iframe');
+  if (!iframe) {
+    iframe = document.createElement('iframe');
+    iframe.id = 'submit-iframe';
+    iframe.name = 'submit-iframe';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
   }
+
+  var form = document.createElement('form');
+  form.method = 'POST';
+  form.action = SCRIPT_URL;
+  form.target = 'submit-iframe';
+  form.style.display = 'none';
+
+  var input = document.createElement('input');
+  input.type = 'hidden';
+  input.name = 'payload';
+  input.value = JSON.stringify(payload);
+  form.appendChild(input);
+
+  document.body.appendChild(form);
+  form.submit();
+  document.body.removeChild(form);
+
+  setTimeout(function() {
+    document.getElementById(day + '-panel').classList.remove('visible');
+    document.getElementById('success').classList.add('visible');
+    document.querySelector('.toggle-row').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, 1500);
+}
 </script>
 </body>
 </html>

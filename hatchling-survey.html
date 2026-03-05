@@ -206,6 +206,37 @@
   textarea:focus { border-color: var(--finchblue); }
   textarea::placeholder { color: #bbb; }
 
+    /* rotation rows */
+  .rotation-row {
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+
+  .rotation-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+
+  .rotation-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .rotation-fields label {
+    font-size: 11px;
+    color: #999;
+    display: block;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
   /* Select */
   select {
     width: 100%;
@@ -293,7 +324,7 @@
     <!-- To unlock a tab, remove the class "locked" from the button -->
     <button class="toggle-btn active" onclick="switchTo('day1')">Monday</button>
     <!-- <button class="toggle-btn locked">Tuesday</button> -->
-    <button class="toggle-btn locked">Tuesday</button>
+    <button class="toggle-btn" onclick="switchTo('tuesday')">Tuesday</button>
     <!-- <button class="toggle-btn locked">Wednesday</button> -->
     <button class="toggle-btn locked">Wednesday</button>
     <!-- <button class="toggle-btn locked">Thursday</button> -->
@@ -417,43 +448,174 @@
 
   <!-- TUESDAY PANEL -->
   <!-- To unlock: remove "locked" from the Tuesday toggle-btn above, then uncomment this panel -->
-  <!--
+ 
   <div id="tuesday-panel" class="survey-panel">
     <div class="day-tag">📅 Tuesday</div>
 
-    <div class="card">
+        <div class="card">
       <div class="question-label">What's your name?</div>
-      <div class="question-hint">So we know who this is from.</div>
-      <input type="text" id="tue-name" placeholder="Your name" />
+      <div class="question-hint">You may also remain anonymous. </div>
+      <input type="text" id="tues-name" placeholder="Your name (optional)" />
     </div>
 
     <div class="card">
-      <div class="question-label">How was Tuesday?</div>
-      <div class="question-hint">1 = rough · 10 = couldn't be better</div>
-      <div class="rating-row" id="tue-rating">
-        <button class="rating-btn" onclick="selectRating('tue-rating', 1)">1</button>
-        <button class="rating-btn" onclick="selectRating('tue-rating', 2)">2</button>
-        <button class="rating-btn" onclick="selectRating('tue-rating', 3)">3</button>
-        <button class="rating-btn" onclick="selectRating('tue-rating', 4)">4</button>
-        <button class="rating-btn" onclick="selectRating('tue-rating', 5)">5</button>
-        <button class="rating-btn" onclick="selectRating('tue-rating', 6)">6</button>
-        <button class="rating-btn" onclick="selectRating('tue-rating', 7)">7</button>
-        <button class="rating-btn" onclick="selectRating('tue-rating', 8)">8</button>
-        <button class="rating-btn" onclick="selectRating('tue-rating', 9)">9</button>
-        <button class="rating-btn" onclick="selectRating('tue-rating', 10)">10</button>
+      <div class="question-label">Claims & Police Reports Rotation</div>
+      <div class="question-hint">Tell us about how it went, what was most helpful, what you learned.</div>
+      <div id="tues-rotation-list">
+        <div class="rotation-row">
+          <div class="rotation-name">About the intro session itself</div>
+          <div class="card">
+            <div class="question-label">How clear was the purpose of this rotation?</div>
+            <div class="question-hint">1 = super unclear · 10 = crystal clear</div>
+      <div class="rating-row" id="tues-purpose-rating">
+        <button class="rating-btn" onclick="selectRating('tues-purpose-rating', 1)">1</button>
+        <button class="rating-btn" onclick="selectRating('tues-purpose-rating', 2)">2</button>
+        <button class="rating-btn" onclick="selectRating('tues-purpose-rating', 3)">3</button>
+        <button class="rating-btn" onclick="selectRating('tues-purpose-rating', 4)">4</button>
+        <button class="rating-btn" onclick="selectRating('tues-purpose-rating', 5)">5</button>
+        <button class="rating-btn" onclick="selectRating('tues-purpose-rating', 6)">6</button>
+        <button class="rating-btn" onclick="selectRating('tues-purpose-rating', 7)">7</button>
+        <button class="rating-btn" onclick="selectRating('tues-purpose-rating', 8)">8</button>
+        <button class="rating-btn" onclick="selectRating('tues-purpose-rating', 9)">9</button>
+        <button class="rating-btn" onclick="selectRating('tues-purpose-rating', 10)">10</button>
       </div>
-      <div class="rating-labels"><span>Rough</span><span>Couldn't be better</span></div>
+      <div class="rating-labels"><span>Super unclear</span><span>Crystal clear</span></div>
+            </div>
+            <div class="card">
+            <div class="question-label">Did you understand the team's process by the end?</div>
+            <div class="question-hint"> How the meeting with Julia prepared you </div>
+              <div id="tues-hire-list">
+        
+      </div>
+            <div>
+            
+              <select>
+                <option value="">—</option>
+                <option>Solid, I knew exactly what to do</option>
+                <option>Good, I was confident enough to figure things out on my own</option>
+                <option>Alright, I felt somewhat ready to get started</option>
+                <option>Not great, I was confused about what to do</option>
+              </select>
+            </div>
+            <div style="margin-top: 16px;"></div>
+            <textarea id="process-select-comment" placeholder="Anything specific to share? (optional)"></textarea>
+
+          </div>
+          <div class="card">
+            <div class="question-label">What was the most useful thing you learned?</div>
+            <div class="question-hint"> </div>
+            <div style="margin-top: 16px;"></div>
+            <textarea id="tues-most-helpful-comment" placeholder="The example claim walk-through, Finch app tutorial..."></textarea>
+        </div>
+      </div>
+            
+      </div>
+      
     </div>
 
     <div class="card">
-      <div class="question-label">Anything on your mind after Tuesday?</div>
+      <div class="question-label">How was your Claims & Police Reports rotation day, overall?</div>
+      <div class="question-hint">1 = rough start · 10 = couldn't have gone better</div>
+      <div class="rating-row" id="tues-rating">
+        <button class="rating-btn" onclick="selectRating('tues-rating', 1)">1</button>
+        <button class="rating-btn" onclick="selectRating('tues-rating', 2)">2</button>
+        <button class="rating-btn" onclick="selectRating('tues-rating', 3)">3</button>
+        <button class="rating-btn" onclick="selectRating('day1-rating', 4)">4</button>
+        <button class="rating-btn" onclick="selectRating('day1-rating', 5)">5</button>
+        <button class="rating-btn" onclick="selectRating('day1-rating', 6)">6</button>
+        <button class="rating-btn" onclick="selectRating('day1-rating', 7)">7</button>
+        <button class="rating-btn" onclick="selectRating('day1-rating', 8)">8</button>
+        <button class="rating-btn" onclick="selectRating('day1-rating', 9)">9</button>
+        <button class="rating-btn" onclick="selectRating('day1-rating', 10)">10</button>
+      </div>
+      <div class="rating-labels"><span>Rough start</span><span>Couldn't be better</span></div>
+    </div>
+
+        <div class="card">
+      <div class="question-label">How was the HR and People Operations Meeting?</div>
+      <div class="question-hint">1 = rough start · 10 = couldn't have gone better</div>
+      <div class="rating-row" id="POPS-rating">
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 1)">1</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 2)">2</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 3)">3</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 4)">4</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 5)">5</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 6)">6</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 7)">7</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 8)">8</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 9)">9</button>
+        <button class="rating-btn" onclick="selectRating('POPS-rating', 10)">10</button>
+      </div>
+      <div class="rating-labels"><span>Rough start</span><span>Couldn't be better</span></div>
+        <div style="margin-top: 16px;">
+        <textarea id="POPS-rating-comment" placeholder="Anything specific to share? (optional)"></textarea>
+        </div>
+      </div>
+
+       <div class="card">
+      <div class="question-label">How was system/laptop setup?</div>
+      <div class="question-hint">1 = rough start · 10 = couldn't have gone better</div>
+      <div class="rating-row" id="system-rating">
+        <button class="rating-btn" onclick="selectRating('system-rating', 1)">1</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 2)">2</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 3)">3</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 4)">4</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 5)">5</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 6)">6</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 7)">7</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 8)">8</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 9)">9</button>
+        <button class="rating-btn" onclick="selectRating('system-rating', 10)">10</button>
+      </div>
+      <div class="rating-labels"><span>Rough start</span><span>Couldn't be better</span></div>
+        <div style="margin-top: 16px;">
+        <textarea id="system-rating-comment" placeholder="Anything specific to share? (optional)"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+      <div class="question-label">How were your tutorial sessions (Finch App, Scavenger hunts)?</div>
+      <div class="question-hint">1 = rough start · 10 = couldn't have gone better</div>
+      <div class="rating-row" id="tutorial-rating">
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 1)">1</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 2)">2</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 3)">3</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 4)">4</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 5)">5</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 6)">6</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 7)">7</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 8)">8</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 9)">9</button>
+        <button class="rating-btn" onclick="selectRating('tutorial-rating', 10)">10</button>
+      </div>
+      <div class="rating-labels"><span>Rough start</span><span>Couldn't be better</span></div>
+        <div style="margin-top: 16px;">
+        <textarea id="tutorial-rating-comment" placeholder="Anything specific to share? (optional)"></textarea>
+        </div>
+      </div>
+
+      <div class="card">
+  <div class="question-label">How did the structure of the day feel?</div>
+  <select id="day1-structure">
+    <option value="">—</option>
+    <option>Not structured enough, I felt lost</option>
+    <option>Almost structured enough, there were a few moments I felt unsure what to do</option>
+    <option>Just structured enough</option>
+    <option>A little too structured, I would've liked more time to explore on my own</option>
+    <option>Way too structured, I was overwhelmed</option>
+  </select>
+  </div>
+
+
+    <div class="card">
+      <div class="question-label">Anything else on your mind after Day 1?</div>
       <div class="question-hint">What worked, what didn't, what you wish you'd known.</div>
-      <textarea id="tue-feedback" placeholder="Share anything..."></textarea>
+      <textarea id="day1-feedback" placeholder="Share anything..."></textarea>
     </div>
 
     <button class="submit-btn" onclick="submitSurvey('tuesday')">Submit →</button>
   </div>
-  -->
+  
 
   <!-- WEDNESDAY PANEL -->
   <!-- To unlock: remove "locked" from the Wednesday toggle-btn above, then uncomment this panel -->
@@ -587,7 +749,7 @@
   const SCRIPT_URL = 'https://script.google.com/a/macros/finchlegal.com/s/AKfycbzKCt1AZ4f00zA5jQPvZGr7LOiBtLewuGh7KwJwVxw2pQgPN2SPQvtLFqMvPH5fyCDz9Q/exec';
 
   // Days that are currently active (add day IDs here as you unlock them)
-  const activeDays = ['day1'];
+  const activeDays = ['day1', 'tuesday'];
 
   function switchTo(day) {
     activeDays.forEach(function(d) {

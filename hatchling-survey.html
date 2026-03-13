@@ -1038,10 +1038,18 @@
   const SCRIPT_URL = 'https://script.google.com/a/macros/finchlegal.com/s/AKfycbzZS-Mc959wsOag_VKA4olr2AuKwsPamG-jL-KvPgMRXpDBKtbqjmhndnge8lrYQetx/exec';
 
   // ============================================================
-  // UPDATE THIS DATE at the start of each new onboarding cohort
-  // Format: 'YYYY-MM-DD' — must be the Monday of onboarding week
+  // This date automatically updates based off of the Monday 
+  // of that week
   // ============================================================
-  const cohortStartDate = '2026-03-16';
+  function getMondayOfCurrentWeek() {
+  const today = new Date();
+  const day = today.getDay(); // 0 = Sunday, 1 = Monday, ...
+  const diff = today.getDate() - day + (day === 0 ? -6 : 1); // adjust if Sunday
+  const monday = new Date(today.setDate(diff));
+  return monday.toISOString().split('T')[0]; // returns 'YYYY-MM-DD'
+}
+
+const cohortStartDate = getMondayOfCurrentWeek();
 
   // Day config — maps each day to its panel ID and display label
   const days = [

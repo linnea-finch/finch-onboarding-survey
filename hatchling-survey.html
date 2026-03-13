@@ -1044,9 +1044,16 @@
   function getMondayOfCurrentWeek() {
   const today = new Date();
   const day = today.getDay(); // 0 = Sunday, 1 = Monday, ...
-  const diff = today.getDate() - day + (day === 0 ? -6 : 1); // adjust if Sunday
-  const monday = new Date(today.setDate(diff));
-  return monday.toISOString().split('T')[0]; // returns 'YYYY-MM-DD'
+  const diff = day === 0 ? -6 : 1 - day; // adjust if Sunday
+  
+  const monday = new Date(today);
+  monday.setDate(today.getDate() + diff);
+  
+  // Use local date parts instead of toISOString()
+  const yyyy = monday.getFullYear();
+  const mm = String(monday.getMonth() + 1).padStart(2, '0');
+  const dd = String(monday.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
 }
 
 const cohortStartDate = getMondayOfCurrentWeek();
